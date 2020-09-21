@@ -2,32 +2,19 @@
     "AWSEBDockerrunVersion": 2,
     "containerDefinitions": [
         {
-            "name": "mysql-server",
-            "image": "mysql:5.7",
-            "hostname": "mysql-server",
-            "environment": [
-                {
-                    "name": "MYSQL_ROOT_PASSWORD",
-                    "value": "password"
-                },
-                {
-                    "name": "MYSQL_DATABASE",
-                    "value": "logindb"
-                }
-            ],
-            "memory": 500,
-            "essential": true
-        },
-        {
             "name": "structure_loginapp",
             "image": "asad183099/structure_loginapp",
-            "Ports": [
+            "portMappings": [
                 {
-                  "ContainerPort": 8888,
-                  "HostPort": 80
+                  "containerPort": 8888,
+                  "hostPort": 80
                 }
             ],
             "environment": [
+                {
+                    "name": "SERVERPORT",
+                    "value": "8888"
+                },
                 {
                     "name": "MSHOST",
                     "value": "mysql-server"
@@ -56,8 +43,25 @@
             "links": [
                 "mysql-server"
             ],
-            "memory": 128,
+            "memory": 500,
             "essential": false
+        },
+        {
+            "name": "mysql-server",
+            "image": "mysql:5.7",
+            "hostname": "mysql-server",
+            "environment": [
+                {
+                    "name": "MYSQL_ROOT_PASSWORD",
+                    "value": "password"
+                },
+                {
+                    "name": "MYSQL_DATABASE",
+                    "value": "logindb"
+                }
+            ],
+            "memory": 128,
+            "essential": true
         }
     ]
 }
