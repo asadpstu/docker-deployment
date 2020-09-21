@@ -4,24 +4,25 @@ services:
     - docker
 
 before_install:
-    - docker build -t softwarebhayya/loginapp .
+    - docker build -t asad183099/structure_loginapp .
 
 script:
-    - docker run softwarebhayya/loginapp npm test
+    - docker run asad183099/structure_loginapp npm test
 
 after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-    - docker push softwarebhayya/loginapp
+    - docker push asad183099/structure_loginapp
 
 deploy:
-    provider: elasticbeanstalk
-    region: ap-south-1
-    app: docker-loginapp
-    env: DockerLoginapp-env
-    bucket_name: elasticbeanstalk-ap-south-1-679022722124
-    bucket_path: docker-loginapp
-    on:
-        branch: master
+    edge: true
     access_key_id: $AWS_ACCESS_KEY
     secret_acces_key: $AWS_SECRET_KEY
+    provider: elasticbeanstalk
+    region: ap-southeast-1
+    app: docker-deployment
+    env: DockerDeployment-env
+    bucket_name: elasticbeanstalk-ap-southeast-1-947202945543
+    bucket_path: docker-deployment
+    on:
+        branch: master  
