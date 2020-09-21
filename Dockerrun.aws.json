@@ -21,6 +21,12 @@
         {
             "name": "structure_loginapp",
             "image": "asad183099/structure_loginapp",
+            "Ports": [
+                {
+                  "ContainerPort": 8888,
+                  "HostPort": 80
+                }
+            ],
             "environment": [
                 {
                     "name": "MSHOST",
